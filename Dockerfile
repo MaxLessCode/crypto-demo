@@ -12,13 +12,14 @@ RUN go mod download
 # Installer templ pour la génération des templates
 RUN go install github.com/a-h/templ/cmd/templ@latest
 
-# Installer Node et Tailwind pour générer le CSS
+# Installer Node pour Tailwind
 RUN apk add --no-cache nodejs npm
-COPY package.json package-lock.json* ./
-RUN npm ci 2>/dev/null || npm install
 
-# Copier le reste du code source
+# Copier le code source (node_modules exclu via .dockerignore)
 COPY . .
+
+# Installer les dépendances Node et générer output.css
+RUN npm ci 2>/dev/null || npm install
 
 # Générer output.css et les templates
 RUN npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css

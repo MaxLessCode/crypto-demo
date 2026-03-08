@@ -8,7 +8,8 @@ services:
     ports:
       - "8090:8090"
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       - GO_ENV=production
     volumes:

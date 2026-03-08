@@ -1,0 +1,42 @@
+package layouts
+
+import "crypto-demo/ui/components/sidebar"
+import "crypto-demo/ui/components/icon"
+import "crypto-demo/ui/components/button"
+
+templ SidebarMenu() {
+	@sidebar.Sidebar(sidebar.Props{}) {
+		@sidebar.Header() {
+			<div class="flex items-center gap-3 p-4 text-primary">
+				@icon.Hexagon() 
+				<span class="text-xl font-black tracking-tight">CryptoDash.</span>
+			</div>
+		}
+		
+		@sidebar.Content(sidebar.ContentProps{Class: "flex flex-col items-center"}) {
+			@sidebar.Menu(sidebar.MenuProps{Class: "pl-4"}) {
+				@sidebar.MenuItem(sidebar.MenuItemProps{Class: "flex items-center gap-2 text-primary"}) {
+					@sidebar.MenuButton(sidebar.MenuButtonProps{Href: "#", Tooltip: "Dashboard"}) {@icon.House(icon.Props{Class: "size-4"}) <span>Dashboard</span>} }
+
+				@sidebar.MenuItem(sidebar.MenuItemProps{Class: "flex items-center gap-2"}) {
+					@sidebar.MenuButton(sidebar.MenuButtonProps{Href: "#", Tooltip: "Portefeuille"}) {@icon.Wallet(icon.Props{Class: "size-4"}) <span>Portefeuille</span>} }
+
+				@sidebar.MenuItem(sidebar.MenuItemProps{Class: "flex items-center gap-2"}) {
+					@sidebar.MenuButton(sidebar.MenuButtonProps{Href: "#", Tooltip: "Marchés"}) {@icon.TrendingUp(icon.Props{Class: "size-4"}) <span>Marchés</span>} }
+
+				@sidebar.MenuItem(sidebar.MenuItemProps{Class: "flex items-center gap-2"}) {
+					@sidebar.MenuButton(sidebar.MenuButtonProps{Href: "#", Tooltip: "Historique"}) {@icon.History(icon.Props{Class: "size-4"}) <span>Historique</span>} }
+					
+		}
+		
+		@sidebar.Footer() {
+			<div class="p-4">
+				@button.Button(button.Props{Variant: "destructive", Class: "w-full flex justify-start gap-3"}) {
+					@icon.LogOut()
+					Déconnexion
+				}
+			</div>
+		}
+	}
+}
+}

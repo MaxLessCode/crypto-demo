@@ -1,0 +1,46 @@
+package layouts
+
+import (
+	"crypto-demo/ui/components/avatar"
+	"crypto-demo/ui/components/button"
+	"crypto-demo/ui/components/badge"
+	"crypto-demo/ui/components/icon"
+)
+
+templ Navbar() {
+	<header class="flex items-center justify-between px-6 py-4 border-b border-border sticky top-0 z-30 min-h-[72px] bg-background/95 backdrop-blur">
+		
+		<!-- Logo visible uniquement sur mobile (la sidebar le cache sur Desktop) -->
+		<div class="flex items-center gap-2 text-primary md:hidden">
+			@icon.Hexagon()
+			<span class="text-xl font-black tracking-tight">CryptoDash.</span>
+		</div>
+
+		<!-- Espace vide pour pousser les éléments à droite sur Desktop -->
+		<div class="hidden flex-1 md:block"></div>
+
+		<!-- Menu utilisateur -->
+		<div class="flex items-center gap-4">
+			
+			<!-- Cloche de Notification -->
+			<div class="relative cursor-pointer">
+				@button.Button(button.Props{Variant: "ghost", Size: "icon"}) {
+					@icon.Bell()
+				}
+				<div class="absolute top-1 right-1">
+					<!-- Un petit badge rouge clignotant pour capter l'attention du client -->
+					@badge.Badge(badge.Props{Variant: "destructive", Class: "w-2.5 h-2.5 p-0 rounded-full animate-pulse"}) {
+						<span class="sr-only">Notifications actives</span>
+					}
+				</div>
+			</div>
+			
+			<!-- Profil Utilisateur avec Avatar TemplUI -->
+			<div class="transition-opacity cursor-pointer hover:opacity-80">
+				@avatar.Avatar(avatar.Props{
+					Attributes: templ.Attributes{"src": "https://i.pravatar.cc/150?u=cryptodash", "alt": "Profil Utilisateur", "initials": "JD"},
+				})
+			</div>
+		</div>
+	</header>
+}

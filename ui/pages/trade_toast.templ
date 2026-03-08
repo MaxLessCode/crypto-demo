@@ -1,0 +1,22 @@
+package pages
+
+import (
+	"fmt"
+	"crypto-demo/ui/components/toast"
+)
+
+// TradeSuccessToast rend un toast de succès pour l'OOB swap HTMX.
+// Le wrapper avec hx-swap-oob permet d'ajouter le toast dans #toast-container.
+templ TradeSuccessToast(symbol string, amount float64) {
+	<div hx-swap-oob="beforeend:#toast-container">
+		@toast.Toast(toast.Props{
+			Title:         "Ordre exécuté",
+			Description:   fmt.Sprintf("Achat de %.2f %s effectué avec succès.", amount, symbol),
+			Variant:       toast.VariantSuccess,
+			ShowIndicator: true,
+			Icon:          true,
+			Dismissible:   true,
+			Duration:      4000,
+		})
+	</div>
+}

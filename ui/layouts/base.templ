@@ -1,0 +1,53 @@
+package layouts
+
+import "crypto-demo/ui/components/toast"
+
+// Base est le squelette principal du Dashboard.
+templ BaseLayout(title string) {
+	<!DOCTYPE html>
+	<html lang="fr" class="dark">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			
+			<title>{ title } | CryptoDash</title>
+			
+			<!-- CSS Tailwind généré -->
+			<link rel="stylesheet" href="/assets/css/output.css"/>
+			
+			<!-- HTMX & Alpine.js -->
+			<script src="https://unpkg.com/htmx.org@2.0.0" defer></script>
+			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+			
+			<!-- Scripts vitaux des composants TemplUI installés -->
+			<script src="/assets/js/components/sidebar.min.js" defer></script>
+			<script src="/assets/js/components/dropdown.min.js" defer></script>
+			<script src="/assets/js/components/dialog.min.js" defer></script>
+			<script src="/assets/js/components/chart.min.js" defer></script>
+			@toast.Script()
+
+			<meta name="referrer" content="no-referrer">
+		</head>
+
+		<body class="flex h-screen overflow-hidden antialiased bg-background text-foreground" hx-boost="true">
+			
+			<!-- Navigation Latérale (Sidebar) -->
+			 @SidebarMenu() 
+
+			<!-- Conteneur de la zone de travail -->
+			<div class="relative flex flex-col flex-1 overflow-hidden">
+				
+				<!-- Barre Supérieure (Navbar) -->
+				@Navbar()
+
+				<!-- Cible pour nos futures pages -->
+				<main id="main-content" class="flex-1 p-6 overflow-y-auto md:p-8">
+					{ children... }
+				</main>
+			</div>
+
+			<!-- Conteneur pour les toasts (HTMX OOB swap) -->
+			<div id="toast-container" class="fixed bottom-0 right-0 z-[100] p-4 pointer-events-none flex flex-col gap-2 items-end"></div>
+		</body>
+	</html>
+}

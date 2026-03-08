@@ -1,0 +1,7 @@
+{
+  "componentsDir": "ui/components",
+  "utilsDir": "utils",
+  "moduleName": "crypto-demo",
+  "jsDir": "assets/js/components",
+  "jsPublicPath": "assets/js/components"
+}

@@ -1,0 +1,17 @@
+version: '3'
+
+tasks:
+  tailwind-watch:
+    desc: Run tailwindcss in watch mode
+    cmds:
+      - tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch
+
+  air:
+    desc: Run air for hot reload
+    cmds:
+      - air
+
+  dev:
+    desc: Start development server with hot reload
+    cmds:
+      - task --parallel tailwind-watch air

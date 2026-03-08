@@ -1,0 +1,24 @@
+root = "."
+testdata_dir = "testdata"
+tmp_dir = "tmp"
+
+[build]
+  # On demande à air de lancer templ generate avant de compiler le binaire Go
+  cmd = "go tool templ generate && go build -o ./tmp/main ./main.go"
+  bin = "./tmp/main"
+  # On surveille les extensions Go, Templ, et le fichier CSS de sortie
+  include_ext = ["go", "tpl", "tmpl", "html", "templ", "css"]
+  exclude_dir = ["assets", "tmp", "vendor", "node_modules"]
+  # On surveille spécifiquement ton CSS généré pour déclencher le reload
+  include_file = ["assets/css/output.css"]
+  delay = 500 # ms pour laisser le temps à Tailwind de finir d'écrire
+  exclude_regex = ["_templ.go"]
+
+[log]
+  time = false
+
+[color]
+  main = "magenta"
+  watcher = "cyan"
+  build = "yellow"
+  runner = "green"
